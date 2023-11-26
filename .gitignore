@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Environment configuration files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug logs
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Production build folder
+/build
+
+# Temporary files
+/temp
+
+# Editor directories and files
+.idea
+*.swp
+*.swo
+.vscode/
+
+# Operating system generated files
+.DS_Store
+Thumbs.db
+
+# Personal ignore files
+.gitignore-global
