@@ -95,10 +95,24 @@ const getProducts = async (req, res) => {
     }
 };
 
+// Retrieves the total number of products
+const getTotalProductCount = async (req, res) => {
+    try {
+        const search = req.query.search || null;
+        logger.info(`Fetching total product count with search: ${search}`);
+        const total = await productModel.getTotalProductCount(search);
+        res.json(total);
+    } catch (err) {
+        logger.error(`Error fetching total product count: ${err.message}`);
+        res.status(500).json({ message: "Server Error" });
+    }
+};
+
 module.exports = {
     getProducts,
     getProductById,
     createProduct,
     updateProduct,
     deleteProduct,
+    getTotalProductCount,
 };

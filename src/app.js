@@ -4,6 +4,7 @@ const logger = require("./logger");
 
 const apiKeyMiddleware = require("./middlewares/apiKeyMiddleware");
 const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(
 app.use(apiKeyMiddleware);
 
 app.use("/auth", authRoutes);
+app.use("/users", userRoutes);
 app.use("/products", productRoutes);
 
 app.use((err, req, res, next) => {
