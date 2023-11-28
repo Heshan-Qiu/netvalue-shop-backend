@@ -30,14 +30,14 @@ Follow these steps to set up the project:
 4. Configure environment variables:
 
 -   Set the database connection details in a `.env` file.
-    POSTGRES_USER=
-    POSTGRES_HOST=
-    POSTGRES_PASSWORD=
-    POSTGRES_DATABASE=
+    -   POSTGRES_USER=
+    -   POSTGRES_HOST=
+    -   POSTGRES_PASSWORD=
+    -   POSTGRES_DATABASE=
 -   Set the server port, API key, and JWT secret in the `.env` file.
-    PORT=
-    API_KEY=
-    JWT_SECRET=
+    -   PORT=
+    -   API_KEY=
+    -   JWT_SECRET=
 
 5. Start the server:
    node ./src/app.js
