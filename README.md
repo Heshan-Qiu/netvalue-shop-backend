@@ -16,7 +16,7 @@ This backend implementation is part of a technical test for a job interview. It 
 Follow these steps to set up the project:
 
 1. Clone the repository:
-   git clone https://github.com/Heshan-Qiu/netvalue-shop-backend
+   git clone https://github.com/Heshan-Qiu/netvalue-shop-backend.git
 
 2. Install dependencies:
    npm install
