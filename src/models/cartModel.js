@@ -1,6 +1,13 @@
+// models/cartModel.js
+// This file defines the Cart model for database interactions, providing methods to create, read, update, and delete carts.
+
 const pool = require("./db");
 const logger = require("../logger");
 
+/**
+ * Fetches all carts along with associated user details.
+ * @returns {Promise<Array>} A promise that resolves to an array of carts with user details.
+ */
 const getCartsWithUser = async () => {
     logger.info(`Fetching carts`);
     const carts = await pool.query(
@@ -9,6 +16,11 @@ const getCartsWithUser = async () => {
     return carts.rows;
 };
 
+/**
+ * Retrieves a specific cart by the user ID.
+ * @param {number} userId - The ID of the user.
+ * @returns {Promise<Object>} A promise that resolves to the cart of the specified user.
+ */
 const getCartByUserId = async (userId) => {
     logger.info(`Fetching cart with user ID: ${userId}`);
     const cart = await pool.query(
@@ -18,6 +30,14 @@ const getCartByUserId = async (userId) => {
     return cart.rows[0];
 };
 
+/**
+ * Creates a new cart for a user.
+ * @param {number} userId - The ID of the user.
+ * @param {number} totalQuantiy - The total quantity of items in the cart.
+ * @param {number} totalPrice - The total price of items in the cart.
+ * @param {string} status - The status of the cart.
+ * @returns {Promise<Object>} A promise that resolves to the created cart.
+ */
 const createCart = async (userId, totalQuantiy, totalPrice, status) => {
     logger.info(
         `Creating cart with user ID: ${userId}, total quantity: ${totalQuantiy}, total price: ${totalPrice}, status: ${status}`
@@ -29,6 +49,14 @@ const createCart = async (userId, totalQuantiy, totalPrice, status) => {
     return cart.rows[0];
 };
 
+/**
+ * Updates an existing cart.
+ * @param {string} cartId - The ID of the cart.
+ * @param {number} totalQuantity - The updated total quantity.
+ * @param {number} totalPrice - The updated total price.
+ * @param {string} status - The updated status of the cart.
+ * @returns {Promise<Object>} A promise that resolves to the updated cart.
+ */
 const updateCart = async (cartId, totalQuantity, totalPrice, status) => {
     logger.info(
         `Updating cart with cart ID: ${cartId}, total quantity: ${totalQuantity}, total price: ${totalPrice}, status: ${status}`

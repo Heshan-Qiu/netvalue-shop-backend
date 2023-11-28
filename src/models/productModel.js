@@ -1,10 +1,14 @@
 // models/productModel.js
-// Purpose: Product model for interacting with the database.
+// This file defines the Product model for database interactions, providing methods to create, read, update, and delete products.
 
 const pool = require("./db");
 const logger = require("../logger");
 
-// Retrieves a product by its ID
+/**
+ * Retrieves a single product by its ID from the database.
+ * @param {string} id - The ID of the product to retrieve.
+ * @returns {Promise<Object>} A promise that resolves to the product object.
+ */
 const getProductById = async (id) => {
     logger.info(`Fetching product with ID: ${id}`);
     const product = await pool.query(
@@ -14,7 +18,11 @@ const getProductById = async (id) => {
     return product.rows[0];
 };
 
-// Creates a new product
+/**
+ * Creates a new product in the database.
+ * @param {Object} product - The product details to be inserted.
+ * @returns {Promise<Object>} A promise that resolves to the newly created product.
+ */
 const createProduct = async (product) => {
     const { name, sku, price, description, imageUrl } = product;
     logger.info(`Creating product with name: ${name}`);
@@ -25,7 +33,12 @@ const createProduct = async (product) => {
     return newProduct.rows[0];
 };
 
-// Updates an existing product by ID
+/**
+ * Updates an existing product in the database by its ID.
+ * @param {string} id - The ID of the product to update.
+ * @param {Object} product - The updated product details.
+ * @returns {Promise<Object>} A promise that resolves to the updated product.
+ */
 const updateProduct = async (id, product) => {
     const { name, sku, price, description, imageUrl } = product;
     logger.info(`Updating product with ID: ${id}`);
@@ -36,7 +49,11 @@ const updateProduct = async (id, product) => {
     return updatedProduct.rows[0];
 };
 
-// Deletes a product by its ID
+/**
+ * Deletes a product from the database by its ID.
+ * @param {string} id - The ID of the product to delete.
+ * @returns {Promise<Object>} A promise that resolves to the deleted product.
+ */
 const deleteProduct = async (id) => {
     logger.info(`Deleting product with ID: ${id}`);
     const deletedProduct = await pool.query(
@@ -46,7 +63,12 @@ const deleteProduct = async (id) => {
     return deletedProduct.rows[0];
 };
 
-// Retrieves the total number of products
+/**
+ * Retrieves the total count of products in the database.
+ * Supports optional search query to filter the count.
+ * @param {string|null} search - Optional search query for filtering products.
+ * @returns {Promise<number>} A promise that resolves to the count of products.
+ */
 const getTotalProductCount = async (search = null) => {
     let query;
     let queryParams;
@@ -65,7 +87,14 @@ const getTotalProductCount = async (search = null) => {
     return totalProductCount.rows[0];
 };
 
-// Retrieves a list of products with optional search, pagination, and filtering
+/**
+ * Retrieves a list of products from the database.
+ * Supports optional search, pagination, and filtering.
+ * @param {string|null} search - Optional search query for filtering products.
+ * @param {number} page - The page number for pagination.
+ * @param {number} limit - The number of products per page.
+ * @returns {Promise<Array>} A promise that resolves to an array of products.
+ */
 const getProducts = async (search = null, page, limit) => {
     let query;
     let queryParams;

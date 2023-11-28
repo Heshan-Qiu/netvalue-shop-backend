@@ -1,6 +1,15 @@
+// models/cartItemModel.js
+// This file defines the Cart Item model for database interactions, providing methods to create, read, update, and delete cart items.
+
 const pool = require("./db");
 const logger = require("../logger");
 
+/**
+ * Retrieves a specific cart item based on cart and product IDs.
+ * @param {string} cartId - The ID of the cart.
+ * @param {string} productId - The ID of the product.
+ * @returns {Promise<Object>} A promise that resolves to the specified cart item.
+ */
 const getCartItem = async (cartId, productId) => {
     logger.info(
         `Fetching cart item with cart ID: ${cartId}, product ID: ${productId}`
@@ -12,6 +21,11 @@ const getCartItem = async (cartId, productId) => {
     return cartItem.rows[0];
 };
 
+/**
+ * Retrieves all cart items for a specific cart, including product names and images.
+ * @param {string} cartId - The ID of the cart.
+ * @returns {Promise<Array>} A promise that resolves to an array of cart items with product details.
+ */
 const getCartItemsWithProductNameAndImage = async (cartId) => {
     logger.info(`Fetching cart items with cart ID: ${cartId}`);
     const cartItems = await pool.query(
@@ -21,6 +35,14 @@ const getCartItemsWithProductNameAndImage = async (cartId) => {
     return cartItems.rows;
 };
 
+/**
+ * Creates a new cart item.
+ * @param {string} cartId - The ID of the cart.
+ * @param {string} productId - The ID of the product.
+ * @param {number} quantity - The quantity of the product.
+ * @param {number} price - The price of the product.
+ * @returns {Promise<Object>} A promise that resolves to the created cart item.
+ */
 const createCartItem = async (cartId, productId, quantity, price) => {
     logger.info(
         `Creating cart item with cart ID: ${cartId}, product ID: ${productId}, quantity: ${quantity}, price: ${price}`
@@ -32,6 +54,13 @@ const createCartItem = async (cartId, productId, quantity, price) => {
     return cartItem.rows[0];
 };
 
+/**
+ * Updates an existing cart item.
+ * @param {string} cartItemId - The ID of the cart item.
+ * @param {number} quantity - The new quantity.
+ * @param {number} price - The new price.
+ * @returns {Promise<Object>} A promise that resolves to the updated cart item.
+ */
 const updateCartItem = async (cartItemId, quantity, price) => {
     logger.info(
         `Updating cart item with cart item ID: ${cartItemId}, quantity: ${quantity}, price: ${price}`
