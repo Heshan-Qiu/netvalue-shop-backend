@@ -6,6 +6,7 @@ const apiKeyMiddleware = require("./middlewares/apiKeyMiddleware");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
+const cartRoutes = require("./routes/cartRoutes");
 
 const app = express();
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use(apiKeyMiddleware);
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/products", productRoutes);
+app.use("/carts", cartRoutes);
 
 app.use((err, req, res, next) => {
     logger.error(err.stack);
