@@ -59,7 +59,70 @@ This will run all the test cases covering:
 
 ## Usage
 
-Provide details on how to interact with the API, including endpoints and expected request/response formats.
+### Authentication
+
+-   **Login**
+    -   **Method**: POST
+    -   **Endpoint**: `/auth/login`
+    -   **Description**: Used for user authentication. Calls `loginUser` in `authController`.
+    -   **Body**: JSON with user credentials.
+
+### User Routes
+
+-   **Get User by Email**
+    -   **Method**: GET
+    -   **Endpoint**: `/users/:email`
+    -   **Description**: Retrieves a user by email. Handled by `getUserByEmail` in `userController`.
+    -   **Parameters**: `email` - user's email.
+
+### Product Routes
+
+-   **Get Total Product Count**
+    -   **Method**: GET
+    -   **Endpoint**: `/products/total`
+    -   **Description**: Retrieves total product count. Handled by `getTotalProductCount` in `productController`.
+-   **Get Product by ID**
+    -   **Method**: GET
+    -   **Endpoint**: `/products/:id`
+    -   **Description**: Retrieves a product by ID. Handled by `getProductById` in `productController`.
+    -   **Parameters**: `id` - product ID.
+-   **Create Product**
+    -   **Method**: POST
+    -   **Endpoint**: `/products/`
+    -   **Description**: Creates a new product. Handled by `createProduct` in `productController`.
+    -   **Body**: JSON with new product details.
+-   **Update Product**
+    -   **Method**: PUT
+    -   **Endpoint**: `/products/:id`
+    -   **Description**: Updates a product by ID. Handled by `updateProduct` in `productController`.
+    -   **Parameters**: `id` - product ID.
+    -   **Body**: JSON with updated product details.
+-   **Delete Product**
+    -   **Method**: DELETE
+    -   **Endpoint**: `/products/:id`
+    -   **Description**: Deletes a product by ID. Handled by `deleteProduct` in `productController`.
+    -   **Parameters**: `id` - product ID.
+-   **Get Products with Filters**
+    -   **Method**: GET
+    -   **Endpoint**: `/products/`
+    -   **Description**: Retrieves products with filters. Handled by `getProducts` in `productController`.
+
+### Cart Routes
+
+-   **Get All Carts**
+    -   **Method**: GET
+    -   **Endpoint**: `/carts/`
+    -   **Description**: Retrieves all carts. Handled by `getCarts` in `cartController`.
+-   **Add Product to Cart**
+    -   **Method**: POST
+    -   **Endpoint**: `/carts/`
+    -   **Description**: Adds a product to a cart. Handled by `addProductToCart` in `cartController`.
+    -   **Body**: JSON with product and cart details.
+-   **Get Cart by User Email**
+    -   **Method**: GET
+    -   **Endpoint**: `/carts/:userEmail`
+    -   **Description**: Retrieves a cart by user's email. Handled by `getCartByUserEmail` in `cartController`.
+    -   **Parameters**: `userEmail` - user's email.
 
 ## Contact
 
