@@ -1,15 +1,18 @@
 const productModel = require("../src/models/productModel");
 const pool = require("../src/models/db");
 
+// Mock the database pool object to isolate tests from the database.
 jest.mock("../src/models/db", () => ({
     query: jest.fn(),
 }));
 
+// Describe a test suite for the getProductById function.
 describe("getProductById", () => {
     beforeEach(() => {
         pool.query.mockReset();
     });
 
+    // Test case: Should return a product for a given id.
     it("should return a product for a given id", async () => {
         const mockProduct = {
             id: 1,
@@ -30,6 +33,7 @@ describe("getProductById", () => {
         expect(product).toEqual(mockProduct);
     });
 
+    // Test case: Should return undefined if no product is found.
     it("should return undefined if no product is found", async () => {
         pool.query.mockResolvedValue({ rows: [], rowCount: 0 });
 
@@ -42,6 +46,7 @@ describe("getProductById", () => {
         expect(product).toBeUndefined();
     });
 
+    // Test case: Should throw an error if the query fails.
     it("should throw an error if the query fails", async () => {
         pool.query.mockRejectedValue(new Error("DB Error"));
 
@@ -56,11 +61,13 @@ describe("getProductById", () => {
     });
 });
 
+// Describe a test suite for the getProductBySku function.
 describe("createProduct", () => {
     beforeEach(() => {
         pool.query.mockReset();
     });
 
+    // Test case: Should return a product for a given sku.
     it("should create a new product", async () => {
         const mockProduct = {
             name: "product1",
@@ -89,6 +96,7 @@ describe("createProduct", () => {
         expect(product).toEqual(insertedProduct);
     });
 
+    // Test case: Should throw an error if the query fails.
     it("should throw an error if the query fails", async () => {
         const mockProduct = {
             name: "product1",
@@ -116,11 +124,13 @@ describe("createProduct", () => {
     });
 });
 
+// Describe a test suite for the getProductBySku function.
 describe("updateProduct", () => {
     beforeEach(() => {
         pool.query.mockReset();
     });
 
+    // Test case: Should return a product for a given sku.
     it("should update a product", async () => {
         const mockProduct = {
             id: 1,
@@ -148,6 +158,7 @@ describe("updateProduct", () => {
         expect(product).toEqual(mockProduct);
     });
 
+    // Test case: Should throw an error if the query fails.
     it("should throw an error if the query fails", async () => {
         const mockProduct = {
             id: 1,
@@ -177,11 +188,13 @@ describe("updateProduct", () => {
     });
 });
 
+// Describe a test suite for the getProductBySku function.
 describe("deleteProduct", () => {
     beforeEach(() => {
         pool.query.mockReset();
     });
 
+    // Test case: Should return a product for a given sku.
     it("should delete a product", async () => {
         const mockProduct = {
             id: 1,
@@ -202,6 +215,7 @@ describe("deleteProduct", () => {
         expect(product).toEqual(mockProduct);
     });
 
+    // Test case: Should throw an error if the query fails.
     it("should throw an error if the query fails", async () => {
         pool.query.mockRejectedValue(new Error("DB Error"));
 
@@ -214,11 +228,13 @@ describe("deleteProduct", () => {
     });
 });
 
+// Describe a test suite for the getProductBySku function.
 describe("getTotalProductCount", () => {
     beforeEach(() => {
         pool.query.mockReset();
     });
 
+    // Test case: Should return a product for a given sku.
     it("should return the total number of products", async () => {
         pool.query.mockResolvedValue({ rows: [{ count: 5 }], rowCount: 1 });
 
@@ -231,6 +247,7 @@ describe("getTotalProductCount", () => {
         expect(totalProductCount).toEqual({ count: 5 });
     });
 
+    // Test case: Should throw an error if the query fails.
     it("should return the total number of products matching a search term", async () => {
         pool.query.mockResolvedValue({ rows: [{ count: 5 }], rowCount: 1 });
 
@@ -245,6 +262,7 @@ describe("getTotalProductCount", () => {
         expect(totalProductCount).toEqual({ count: 5 });
     });
 
+    // Test case: Should throw an error if the query fails.
     it("should throw an error if the query fails", async () => {
         pool.query.mockRejectedValue(new Error("DB Error"));
 
@@ -259,11 +277,13 @@ describe("getTotalProductCount", () => {
     });
 });
 
+// Describe a test suite for the getProductBySku function.
 describe("getProducts", () => {
     beforeEach(() => {
         pool.query.mockReset();
     });
 
+    // Test case: Should return a list of products with search, page, and limit.
     it("should return a list of products without search, page, or limit", async () => {
         const mockProducts = [
             {
@@ -294,6 +314,7 @@ describe("getProducts", () => {
         expect(products).toEqual(mockProducts);
     });
 
+    // Test case: Should return a list of products with search, page, and limit.
     it("should return a list of products with search, page, and limit", async () => {
         const mockProducts = [
             {
@@ -324,6 +345,7 @@ describe("getProducts", () => {
         expect(products).toEqual(mockProducts);
     });
 
+    // Test case: Should return a list of products with search and without page or limit.
     it("should return a list of products with search and without page or limit", async () => {
         const mockProducts = [
             {
@@ -354,6 +376,7 @@ describe("getProducts", () => {
         expect(products).toEqual(mockProducts);
     });
 
+    // Test case: Should return a list of products with page and limit and without search.
     it("should return a list of products with page and limit and without search", async () => {
         const mockProducts = [
             {
@@ -384,6 +407,7 @@ describe("getProducts", () => {
         expect(products).toEqual(mockProducts);
     });
 
+    // Test case: Should return an empty array if no products are found.
     it("should throw an error if the query fails", async () => {
         pool.query.mockRejectedValue(new Error("DB Error"));
 

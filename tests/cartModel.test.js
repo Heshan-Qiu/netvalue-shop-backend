@@ -1,15 +1,18 @@
 const cartModel = require("../src/models/cartModel");
 const pool = require("../src/models/db");
 
+// Mock the database pool object to isolate tests from the database.
 jest.mock("../src/models/db", () => ({
     query: jest.fn(),
 }));
 
+// Describe a test suite for the getCartsWithUser function.
 describe("getCartsWithUser", () => {
     beforeEach(() => {
         pool.query.mockReset();
     });
 
+    // Test case: Should return carts with user.
     it("should return carts with user", async () => {
         const mockCarts = [
             {
@@ -43,6 +46,7 @@ describe("getCartsWithUser", () => {
         expect(carts).toEqual(mockCarts);
     });
 
+    // Test case: Should return undefined if no cart is found.
     it("should return undefined if no cart is found", async () => {
         pool.query.mockResolvedValue({ rows: [], rowCount: 0 });
 
@@ -54,6 +58,7 @@ describe("getCartsWithUser", () => {
         expect(carts).toEqual([]);
     });
 
+    // Test case: Should throw an error if the database query throws an error.
     it("should throw an error if the database query throws an error", async () => {
         pool.query.mockRejectedValue(new Error("Database error"));
 
@@ -63,11 +68,13 @@ describe("getCartsWithUser", () => {
     });
 });
 
+// Describe a test suite for the getCartByUserId function.
 describe("getCartByUserId", () => {
     beforeEach(() => {
         pool.query.mockReset();
     });
 
+    // Test case: Should return cart by user ID.
     it("should return cart by user ID", async () => {
         const mockCart = {
             cart_id: 1,
@@ -87,6 +94,7 @@ describe("getCartByUserId", () => {
         expect(cart).toEqual(mockCart);
     });
 
+    // Test case: Should return undefined if no cart is found.
     it("should return undefined if no cart is found", async () => {
         pool.query.mockResolvedValue({ rows: [], rowCount: 0 });
 
@@ -99,6 +107,7 @@ describe("getCartByUserId", () => {
         expect(cart).toEqual(undefined);
     });
 
+    // Test case: Should throw an error if the database query throws an error.
     it("should throw an error if the database query throws an error", async () => {
         pool.query.mockRejectedValue(new Error("Database error"));
 
@@ -108,11 +117,13 @@ describe("getCartByUserId", () => {
     });
 });
 
+// Describe a test suite for the createCart function.
 describe("createCart", () => {
     beforeEach(() => {
         pool.query.mockReset();
     });
 
+    // Test case: Should create a cart.
     it("should create a cart", async () => {
         const mockCart = {
             cart_id: 1,
@@ -132,6 +143,7 @@ describe("createCart", () => {
         expect(cart).toEqual(mockCart);
     });
 
+    // Test case: Should throw an error if the database query throws an error.
     it("should throw an error if the database query throws an error", async () => {
         pool.query.mockRejectedValue(new Error("Database error"));
 
@@ -141,11 +153,13 @@ describe("createCart", () => {
     });
 });
 
+// Describe a test suite for the updateCart function.
 describe("updateCart", () => {
     beforeEach(() => {
         pool.query.mockReset();
     });
 
+    // Test case: Should update a cart.
     it("should update a cart", async () => {
         const mockCart = {
             cart_id: 1,
@@ -165,6 +179,7 @@ describe("updateCart", () => {
         expect(cart).toEqual(mockCart);
     });
 
+    // Test case: Should throw an error if the database query throws an error.
     it("should throw an error if the database query throws an error", async () => {
         pool.query.mockRejectedValue(new Error("Database error"));
 
@@ -173,6 +188,7 @@ describe("updateCart", () => {
         );
     });
 
+    // Test case: Should return undefined if no cart is found.
     it("should return undefined if no cart is found", async () => {
         pool.query.mockResolvedValue({ rows: [], rowCount: 0 });
         const cart = await cartModel.updateCart(1, 1, 1, "active");
