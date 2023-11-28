@@ -1,4 +1,4 @@
-# Node.js Express Backend for [Project Name]
+# Node.js Express Backend for NetValue Shop
 
 ## Overview
 
@@ -16,7 +16,7 @@ This backend implementation is part of a technical test for a job interview. It 
 Follow these steps to set up the project:
 
 1. Clone the repository:
-   git clone [repository-url]
+   git clone https://github.com/Heshan-Qiu/netvalue-shop-backend
 
 2. Install dependencies:
    npm install
@@ -30,6 +30,14 @@ Follow these steps to set up the project:
 4. Configure environment variables:
 
 -   Set the database connection details in a `.env` file.
+    POSTGRES_USER=
+    POSTGRES_HOST=
+    POSTGRES_PASSWORD=
+    POSTGRES_DATABASE=
+-   Set the server port, API key, and JWT secret in the `.env` file.
+    PORT=
+    API_KEY=
+    JWT_SECRET=
 
 5. Start the server:
    node ./src/app.js
@@ -42,10 +50,12 @@ npm test
 
 This will run all the test cases covering:
 
--   Successful login
--   User not found scenario
--   Incorrect password handling
--   Server error simulation
+-   All model functions
+-   Authentication controller, including:
+    Successful login
+    User not found scenario
+    Incorrect password handling
+    Server error simulation
 
 ## Usage
 
@@ -53,8 +63,4 @@ Provide details on how to interact with the API, including endpoints and expecte
 
 ## Contact
 
-For any queries or contributions, feel free to contact me at [your-email] or open an issue in this repository.
-
----
-
-Replace `[Project Name]`, `[repository-url]`, and `[your-email]` with the actual project name, repository URL, and your contact email, respectively.
+For any queries or contributions, feel free to contact me at heshan.chiu@gmail.com or open an issue in this repository.
