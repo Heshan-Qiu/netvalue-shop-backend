@@ -14,14 +14,14 @@ const loginUser = async (req, res) => {
         const user = await userModel.getUserByEmail(email);
         if (!user) {
             logger.warn(`User with email ${email} not found`);
-            return res.status(400).send(`User with email ${email} not found`); // Respond with error if user not found.
+            return res.status(401).send(`User with email ${email} not found`); // Respond with error if user not found.
         }
 
         // Compare the provided password with the stored hashed password.
         const isValid = await bcrypt.compare(password, user.password);
         if (!isValid) {
             logger.warn(`Invalid password for user ${email}`);
-            return res.status(400).send(`Invalid password for user ${email}`); // Respond with error if password is invalid.
+            return res.status(401).send(`Invalid password for user ${email}`); // Respond with error if password is invalid.
         }
 
         // User authenticated, log success and create a JWT.
